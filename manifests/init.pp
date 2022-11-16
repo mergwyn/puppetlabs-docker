@@ -541,7 +541,7 @@ class docker (
       fail('You need to provide tcp bind parameter for TLS.')
     }
   }
-  if $storage_driver == 'fuse-overlayfs' { package { 'fuse-overlayfs': }
+  if $storage_driver == 'fuse-overlayfs' { package { 'fuse-overlayfs': } }
 
   if ($version == undef) or ($version !~ /^(17[.][0-1][0-9][.][0-1](~|-|\.)ce|1.\d+)/) {
     if ($docker_ee) {
