@@ -185,7 +185,7 @@
 #
 # @param storage_driver
 #   Specify a storage driver to use
-#   Valid values: aufs, devicemapper, btrfs, overlay, overlay2, furs-overlaysfs, vfs, zfs
+#   Valid values: aufs, devicemapper, btrfs, overlay, overlay2, fuse-overlayfs, vfs, zfs
 #
 # @param dm_basesize
 #   The size to use when creating the base device, which limits the size of images and containers.
