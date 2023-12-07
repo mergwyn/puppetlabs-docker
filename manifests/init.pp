@@ -185,7 +185,7 @@
 #
 # @param storage_driver
 #   Specify a storage driver to use
-#   Valid values: aufs, devicemapper, btrfs, overlay, overlay2, vfs, zfs
+#   Valid values: aufs, devicemapper, btrfs, overlay, overlay2, fuse-overlayfs, vfs, zfs
 #
 # @param dm_basesize
 #   The size to use when creating the base device, which limits the size of images and containers.
@@ -499,8 +499,8 @@ class docker (
         fail('Valid values for storage_driver on windows are windowsfilter')
       }
     } else {
-      assert_type(Pattern[/^(aufs|devicemapper|btrfs|overlay|overlay2|vfs|zfs)$/], $storage_driver) |$a, $b| {
-        fail('Valid values for storage_driver are aufs, devicemapper, btrfs, overlay, overlay2, vfs, zfs.')
+      assert_type(Pattern[/^(aufs|devicemapper|btrfs|overlay|overlay2|fuse-overlayfs|vfs|zfs)$/], $storage_driver) |$a, $b| {
+        fail('Valid values for storage_driver are aufs, devicemapper, btrfs, overlay, fuse-overlayfs, overlay2, vfs, zfs.')
       }
     }
   }
@@ -542,6 +542,7 @@ class docker (
       fail('You need to provide tcp bind parameter for TLS.')
     }
   }
+  if $storage_driver == 'fuse-overlayfs' { package { 'fuse-overlayfs': } }
 
   if ($version == undef) or ($version !~ /^(17[.][0-1][0-9][.][0-1](~|-|\.)ce|1.\d+)/) {
     if ($docker_ee) {
